@@ -1,15 +1,4 @@
-# Seleção do programa
-programa = input(
-    "Digite o número do que quer executar: \n" +
-    "\n" +
-    "1 - Exemplo 01 \n" +
-    "2 - Exercício 01 \n" +
-    "3 - Exercício 02 \n"
-)
-
-if programa == '1':
-    # Exemplo 01 - Imprimindo uma mensagem na tela
-    
+def ex01():
     print("\n")
     print("🟢 Bem vindo ao programa que imprime a mensagem na tela!")
     
@@ -17,9 +6,7 @@ if programa == '1':
     
     print(f"Olá, {nome}!")
 
-elif programa == '2':
-    # Exercício 1 - Crie um programa que o usuário digita o seu nome e retorna o número de caracteres
-    
+def exe01():
     print("\n")
     print("🟢 Bem vindo ao programa que conta a quantidade de caracteres na mensagem!")
 
@@ -29,15 +16,50 @@ elif programa == '2':
 
     print(f"O seu nome possui {len_nome} caracteres")
 
-elif programa == '3':
-    # Exercício 2 - Programa que some dois valores que o usuário inseriu
-    
+def exe02():
     print("\n")
     print("🟢 Bem vindo ao programa que soma dois valores!")
 
-    n1 = int(input("Digite o primeiro valor: "))
-    n2 = int(input("Digite o segundo valor: "))
+    def ler_inteiro(prompt):
+        while True:
+            valor = input(prompt)
+            try:
+                return int(valor)
+            except ValueError:
+                print("Valor inválido! Digite um número inteiro.")
+
+    n1 = ler_inteiro("Digite o primeiro valor: ")
+    n2 = ler_inteiro("Digite o segundo valor: ")
     
     soma = n1 + n2
 
     print(f"A soma dos dois valores é: {soma}")
+
+programas = {
+    "1": ex01,
+    "2": exe01,
+    "3": exe02
+}
+
+def menu():
+    print("Digite o número do que quer executar:")
+    print("1 - Exemplo 01")
+    print("2 - Exercício 01")
+    print("3 - Exercício 02")
+    print("0 - Sair")
+
+while True:
+    menu()
+    escolha = input("> ").strip()
+
+    if escolha == "0":
+        print("Tchau!")
+        break
+
+    func = programas.get(escolha)
+
+    if func:
+        func()
+        break
+    else:
+        print("Opção inválida, tente novamente!")
